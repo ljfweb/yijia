@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="A simple HTML5 Template">
+<meta name="author" content="dron">
+<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<style type="text/css">
+	*{padding: 0;margin: 0;}
+	html,body{width: 100%;}
+	.main_box_btn{width: 100%;margin: 0 auto;position: fixed;top: 0;left: 0;}
+	.main_box_btn div{width: 49%;float: left;text-align: center;border: 1px solid #000;height: 50px;line-height: 50px}
+	#main_con{margin-top: 55px;}
+	dl{width: 100%;height: 150px;}
+	dl dt{width: 20%;float: left;height: 80px;font-weight: 800}
+	dl dt img{width: 62px;height: 62px;}
+	dl dd{width: 80%;float: right;}
+</style>
+<script src="js/jquery-1.11.3.js"></script>
+
+<title></title>
+</head>
+<body>
+	<div id="main_box">
+		<div class="main_box_btn" id="main_box_btn">
+			<div style="background:#ccc;">近期课程</div>
+			<div style="background:#fff;">往期回顾</div>
+		</div>
+		<div id="main_con">
+			<div class="main_con_list con_list">
+				<!-- <dl>
+					<dt><img src="img/tomcat.png"></dt>
+					<dd>公开课题目</dd>
+					<dd><p>萨芬撒</p><span>讲师:</span></dd>
+				</dl> -->
+
+
+			</div>
+			<div class="main_con_list_t con_list" style="display:none;">
+			</div>
+		</div>
+		
+
+	</div>
+	<script type="text/javascript" src="js/tab.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			url: 'http://10.0.172.50/AJAX/ajax/gong_kai_ke.json',
+			dataType: 'json',
+			success:gongKaiKe
+		})
+		
+		function gongKaiKe(data) {
+			var gkk=data.data
+			console.log(gkk)
+			var odl='';
+			for(var i in gkk){
+				console.log(gkk[i].title)
+				odl+='<dl><dt><img src="img/tomcat.png"></dt><dd>'+gkk[i].title+'</dd><dd><p>'+gkk[i].time+'</p><span>讲师:'+gkk[i].teacher+'</span></dd></dl>'
+			}
+			$(".main_con_list").append(odl)
+
+
+		}
+
+
+
+
+		tab.qh({
+			tabelem:$("#main_box_btn div"),
+			conelem:$("#main_con div"),
+			_type:"click"
+			
+		})
+		
+
+	</script>
+</body>
+</html>
